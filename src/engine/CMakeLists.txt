@@ -15,6 +15,7 @@ set(BALOO_ENGINE_SRCS
     phraseanditerator.cpp
     positiondb.cpp
     postingdb.cpp
+    fuzzydb.cpp
     postingiterator.cpp
     queryparser.cpp
     termgenerator.cpp

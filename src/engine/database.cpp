@@ -22,6 +22,7 @@
 #include "database.h"
 #include "transaction.h"
 #include "postingdb.h"
+#include "fuzzydb.h"
 #include "documentdb.h"
 #include "documenturldb.h"
 #include "documentiddb.h"
@@ -104,7 +105,7 @@ bool Database::open(OpenMode mode)
      * maximal number of allowed named databases, must match number of databases we create below
      * each additional one leads to overhead
      */
-    mdb_env_set_maxdbs(m_env, 12);
+    mdb_env_set_maxdbs(m_env, 13);
 
     /**
      * size limit for database == size limit of mmap
@@ -145,6 +146,7 @@ bool Database::open(OpenMode mode)
 
         m_dbis.postingDbi = PostingDB::open(txn);
         m_dbis.positionDBi = PositionDB::open(txn);
+        m_dbis.fuzzyDbi = FuzzyDB::open(txn);
 
         m_dbis.docTermsDbi = DocumentDB::open("docterms", txn);
         m_dbis.docFilenameTermsDbi = DocumentDB::open("docfilenameterms", txn);
@@ -187,6 +189,7 @@ bool Database::open(OpenMode mode)
 
         m_dbis.postingDbi = PostingDB::create(txn);
         m_dbis.positionDBi = PositionDB::create(txn);
+        m_dbis.fuzzyDbi = FuzzyDB::create(txn);
 
         m_dbis.docTermsDbi = DocumentDB::create("docterms", txn);
         m_dbis.docFilenameTermsDbi = DocumentDB::create("docfilenameterms", txn);

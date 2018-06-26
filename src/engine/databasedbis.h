@@ -29,6 +29,7 @@ class DatabaseDbis {
 public:
     MDB_dbi postingDbi;
     MDB_dbi positionDBi;
+    MDB_dbi fuzzyDbi;
 
     MDB_dbi docTermsDbi;
     MDB_dbi docFilenameTermsDbi;
@@ -47,6 +48,7 @@ public:
     DatabaseDbis()
         : postingDbi(0)
         , positionDBi(0)
+        , fuzzyDbi(0)
         , docTermsDbi(0)
         , docFilenameTermsDbi(0)
         , docXattrTermsDbi(0)
@@ -62,7 +64,7 @@ public:
     bool isValid() {
         return postingDbi && positionDBi && docTermsDbi && docFilenameTermsDbi && docXattrTermsDbi &&
                idTreeDbi && idFilenameDbi && docTimeDbi && docDataDbi && contentIndexingDbi && mtimeDbi
-               && failedIdDbi;
+               && failedIdDbi && fuzzyDbi;
     }
 };
 

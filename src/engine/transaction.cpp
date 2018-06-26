@@ -20,6 +20,7 @@
 
 #include "transaction.h"
 #include "postingdb.h"
+#include "fuzzydb.h"
 #include "documentdb.h"
 #include "documenturldb.h"
 #include "documentiddb.h"
@@ -295,8 +296,12 @@ PostingIterator* Transaction::postingIterator(const EngineQuery& query) const
 {
     PostingDB postingDb(m_dbis.postingDbi, m_txn);
     PositionDB positionDb(m_dbis.positionDBi, m_txn);
+    FuzzyDB fuzzy_db(m_dbis.fuzzyDbi, m_txn);
 
     if (query.leaf()) {
+        // TODO: support fuzzy matching through config
+        qDebug() << "returning fuzzy match on" << query.term();
+        return fuzzy_db.iter(query.term());
         if (query.op() == EngineQuery::Equal) {
             return postingDb.iter(query.term());
         } else if (query.op() == EngineQuery::StartsWith) {
