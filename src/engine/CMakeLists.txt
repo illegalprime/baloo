@@ -25,6 +25,7 @@ set(BALOO_ENGINE_SRCS
     writetransaction.cpp
     global.cpp
     fsutils.cpp
+    fuzzysearch.cpp
 )
 
 if(${BUILD_EXPERIMENTAL})

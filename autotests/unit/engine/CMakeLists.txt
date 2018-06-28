@@ -21,6 +21,7 @@ baloo_engine_auto_tests(
 
     termgeneratortest
     queryparsertest
+    fuzzysearchtest
 
     # Query
     andpostingiteratortest
